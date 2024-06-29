@@ -1,0 +1,36 @@
+# Habamax Alacritty Colors
+
+# Default colors
+[colors.primary]
+background = '#1c1c1c'
+foreground = '#b7b7b7'
+
+# Normal colors
+[colors.normal]
+black   = '#1c1c1c'
+red     = '#d1845d'
+green   = '#87af87'
+yellow  = '#afaf87'
+blue    = '#87afd7'
+magenta = '#a580a5'
+cyan    = '#87afaf'
+white   = '#b7b7b7'
+
+# Bright colors
+[colors.bright]
+black   = '#1c1c1c'
+red     = '#d1845d'
+green   = '#87af87'
+yellow  = '#afaf87'
+blue    = '#87afd7'
+magenta = '#a580a5'
+cyan    = '#87afaf'
+white   = '#b7b7b7'
+
+# [[colors.indexed_colors]]
+# index = 16
+# color = '#d18616'
+
+# [[colors.indexed_colors]]
+# index = 17
+# color = '#ff938a'

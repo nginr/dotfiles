@@ -1,0 +1,44 @@
+import = [
+    "./habamax.toml"
+]
+
+[env]
+TERM = "screen-256color"
+
+[font]
+size = 11
+
+[font.bold]
+family = "Iosevka Term  SS02"
+style = "Bold"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "Iosevka Term  SS02"
+style = "Italic"
+
+[font.normal]
+family = "Iosevka Term  SS02"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
+
+[window]
+dimensions = { columns = 160, lines = 30 }  # Default: columns = 0, lines = 0
+title = "Terminal"
+decorations= "none"
+dynamic_title = false
+opacity = 1
+
+[window.padding]
+x = 0
+y = 0
+
+# [shell]
+# program = "/usr/bin/tmux"
+# args = ["new-session", "-A", "-s", "company", "-c", "~/Documents/Programming"]
