@@ -4,4 +4,5 @@
 * Alacritty
 * Bashrc
 * Tmux
+* Vim
 * Collected Scripts
