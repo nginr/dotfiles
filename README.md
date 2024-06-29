@@ -6,3 +6,4 @@
 * Tmux
 * Vim
 * Collected Scripts
+* Nanorc
