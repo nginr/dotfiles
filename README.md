@@ -1,1 +1,4 @@
 # Dotfiles
+
+## Config Files
+* Alacritty
