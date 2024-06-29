@@ -1,0 +1,56 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+export PATH=$PATH:~/.local/scripts
+
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+
+alias more=less
+
+alias l='ls -lAh  --group-directories-first --color=auto'
+alias ll='ls -l   --group-directories-first --color=auto'
+alias la='ls -A   --group-directories-first --color=auto'
+alias lla='ls -la --group-directories-first --color=auto'
+
+alias lm=clear
+alias ..="cd .."
+alias nn="vim"
+alias zz="exit"
+
+alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n%C(white)%s%C(reset) %C(dim white)- %an%C(reset)'"
+alias gl="git log --color --all --decorate --oneline --graph"
+alias ga="git add -A"
+alias gc="git commit -m"
+alias gst="git status"
+
+# alias tc="tmux attach -t company || tmux new -s company -c ~/Documents/Programming"
+alias tn="tmux new-session -A -s company -c ~/Documents/Programming"
+
+alias rg="rg --column --line-number --ignore-case --no-heading --color=always "
+alias so='source ~/.bashrc'
+
+function mkcd () {
+	if [[ $# -lt 1 ]] ; then
+		echo " Usage: mkcd ..Directories"
+            return 0;
+    fi
+	echo "mkcd : $@"
+	for d in $@; do
+		mkdir -p -v $d
+    done
+	echo "cd : ${@: -1}"
+	cd "${@: -1}"
+}
+
+xhost +local:root > /dev/null 2>&1
+shopt -s checkwinsize
+shopt -s expand_aliases
+shopt -s histappend
+export HISTIGNORE='&:ls:ll:la:lm:so:;;:cd ~:cd -:cd ..:[bf]g:exit:h:history:zz'
+export HISTCONTROL=ignoredups:erasedups
+
+source ~/.config/bash/prompt.sh
