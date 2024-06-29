@@ -1,0 +1,18 @@
+#
+# ~/.bash_profile
+#
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
+LS_COLORS="$LS_COLORS"
+LS_COLORS+="*.pdf=0;32:"
+LS_COLORS+="*.sh=01;32:"
+LS_COLORS+="*.rs=01;31:"
+LS_COLORS+="*.exs=01;35:"
+LS_COLORS+="*.ex=01;35:"
+LS_COLORS+="*.c=01;37:"
+LS_COLORS+="*.h=01;37:"
+LS_COLORS+="*.hpp=01;37:"
+LS_COLORS+="*.cpp=01;37"
+
+export LS_COLORS
