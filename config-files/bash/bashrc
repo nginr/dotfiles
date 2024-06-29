@@ -24,7 +24,7 @@ alias zz="exit"
 alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n%C(white)%s%C(reset) %C(dim white)- %an%C(reset)'"
 alias gl="git log --color --all --decorate --oneline --graph"
 alias ga="git add -A"
-alias gc="git commit -m"
+alias gc="git commit"
 alias gst="git status"
 
 # alias tc="tmux attach -t company || tmux new -s company -c ~/Documents/Programming"

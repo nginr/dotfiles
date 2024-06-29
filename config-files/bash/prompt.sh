@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+# Modified from (upekkha) [https://github.com/upekkha/dotfiles/blob/master/.bash_profile]
 
 # ------  custom bash prompt  --------{{{
 my_command_prompt() {
