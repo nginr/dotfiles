@@ -2,3 +2,4 @@
 
 ## Config Files
 * Alacritty
+* Bashrc
