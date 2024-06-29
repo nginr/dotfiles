@@ -1,0 +1,224 @@
+set nocompatible " not vi compatible
+
+colorscheme habamax
+
+let mapleader=","
+
+set foldlevelstart=99
+set encoding=utf-8
+
+set modelines=0
+set nomodeline
+
+syntax on                   " turn on syntax highlighting
+set showmatch               " show matching braces when text indicator is over them
+set matchtime=0             " The amount of time matches flash
+
+filetype plugin indent on " enable file type detection
+set smartindent
+
+"---------------------
+" Basic editing config
+"---------------------
+set undofile
+set shortmess=Iat " disable startup message
+set nu            " number lines
+set rnu           " relative line numbering
+set cmdheight=1   " Height of the command bar
+set incsearch     " incremental search (as string is being typed)
+set hls           " highlight search
+
+" Define replacement for invisible characters (set invlist)
+set listchars=eol:¬,tab:>-,trail:~,space:·
+
+set lbr         " line break
+set scrolloff=8 " show lines above and below cursor (when possible)
+set showmode    " hide mode
+set undodir=~/.vim/undodir
+set viminfo+=n~/.vim/viminfo
+set nowrap
+set nobackup
+set noswapfile
+set nohlsearch
+set updatetime=50
+set cursorline
+set path+=**
+set wildmenu                    " Commands tab complete
+set wildmode=list:longest,full  " Commands tab complete
+
+" Skip Searching files matching pattern
+set wildignore+=tags " ctags
+set wildignore+=*.swp,*.lock
+set wildignore+=.git,.hg,.svn
+set wildignore+=*.aux,*.out,*.toc " LaTeX
+set wildignore+=*.doc,*.pdf,*.cbr,*.cbz
+set wildignore+=*.eot,*.otf,*.ttf,*.woff
+set wildignore+=*.glp,*.gltf,*.tif,*.tga
+set wildignore+=*.mp3,*.oga,*.ogg,*.wav,*.flac
+set wildignore+=tmp,node_modules,bin,build,BUILD,doc
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb
+set wildignore+=*.so,*.o,*.obj,*.exe,*.dll,*.manifest,*.rbc,*.class
+set wildignore+=*.ai,*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png,*.psd,*.webp
+set wildignore+=*.avi,*.divx,*.mp4,*.webm,*.mov,*.m2ts,*.mkv,*.vob,*.mpg,*.mpeg
+
+" highlight column after 'textwidth'
+set cc=120
+" Change fillchars
+set fillchars=diff:⣿,vert:│
+
+set laststatus=1                            " Show the status bar
+set backspace=indent,eol,start              " allow backspacing over everything
+set timeout timeoutlen=1000 ttimeoutlen=100 " fix slow O inserts
+set lazyredraw                              " skip redrawing screen in some cases
+set noautochdir                               " automatically set current directory to directory of last opened file
+set hidden                                  " allow auto-hiding of edited buffers
+set history=8192                            " more history
+set nojoinspaces                            " suppress inserting two spaces between sentences
+set expandtab tabstop=4 shiftwidth=4 softtabstop=4
+
+set ignorecase smartcase " smart case-sensitive search
+set mouse=a              " enable mouse mode (scrolling, selection, etc)
+set clipboard=unnamedplus,unnamed
+
+" disable audible bell
+set noerrorbells visualbell t_vb=
+
+" open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+" FILE BROWSING:
+" Tweaks for browsing: <CR>/v/t to open in an h-split/v-split/tab
+let g:netrw_banner=0         " disable annoying banner
+let g:netrw_browse_split=4   " open files in (0: current pane, 4: previous window P)
+let g:netrw_altv=2           " open splits to the right
+let g:netrw_liststyle=3      " tree view
+let g:netrw_winsize=20       " Netrw gets n % of screen size
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+" C curly brace error fix
+let g:c_no_curly_error = 1
+
+" STATUS LINE:
+set statusline=%-8t       " Filename
+set statusline+=\ %8y     " File Type
+set statusline+=%=%h%m%r  " Flags
+set statusline+=%l/%L     " Cursor line and total lines
+set statusline+=:%c       " Cursor column
+
+runtime ftplugin/man.vim   " MAN RUNTIME Lets you type :Man anymanpage and it will load in vim, color-coded and searchabl
+runtime macros/matchit.vim " MATCHIT RUNTIME {Switch among e.g. if/elsif/else/end}
+
+"-- {{{
+
+map gf :tabe <cfile><CR>
+
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+
+" Make Y behave like D and C
+nnoremap Y y$
+" Shift-G shows full path
+nnoremap <leader>g :echo expand('%:p')<CR>
+" \t -- insert ISO timestamp
+vnoremap <Leader>t c<C-R>=strftime("%FT%T%z")<CR><ESC>
+
+" \0 -- Quickly switch/navigate tabs
+nnoremap <silent> \0 :tabnext<CR>
+nnoremap <silent> \s :tab split<CR>
+
+" show all <leader> mappings
+nnoremap <leader>? :map <leader><CR>
+
+" Insert the current date
+cnoremap ZMD <C-R>=strftime("%d-%m-%Y_%H-%M-")<CR>
+inoremap ZMD <C-R>=strftime("%d/%m/%Y %H:%M")<CR>
+
+" Computers are dumb
+" scroll gets reset every time the window is resized
+nnoremap <C-u> 10<C-u>zz
+nnoremap <C-d> 10<C-d>zz
+
+" Quickfix
+nnoremap <leader>q :cw<CR>
+nnoremap <leader>n :cnext<CR>
+nnoremap <leader>c :cclose<CR>
+nnoremap <leader>w :cope<CR>
+nnoremap <leader>p :cprev<CR>
+
+" Better movement
+nnoremap H ^
+vnoremap H ^
+nnoremap L $
+vnoremap L $
+
+nnoremap Q :clo<CR>
+
+" Move to last edit location and put it in the center of the screen
+nnoremap <C-o> <C-o>zz
+
+" Don't automatically jump on search
+nnoremap * :keepjumps normal! mi*`i<CR>
+nnoremap # :keepjumps normal! mi#`i<CR>
+
+
+"-- }}}
+
+"-- {{{
+
+" Resize splits when the window is resized
+autocmd VimResized * :wincmd =
+" Disable auto-comment after breaking lines with formatoptions
+autocmd FileType * setl fo-=c fo-=r fo-=o
+
+" Highlight superfluous whitespace in orange
+" highlight ExtWhiteSpace guifg=White   guibg=#DF5F00   gui=bold   ctermfg=255   ctermbg=166   cterm=bold
+
+" Automatically toggle quickfix window
+autocmd QuickFixCmdPost [^1]* nested cwindow
+autocmd QuickFixCmdPost    1* nested lwindow
+
+autocmd BufNewFile *.sh,*.bash 0r ~/.vim/templates/skeleton.sh   | normal! G
+autocmd BufNewFile *.c         0r ~/.vim/templates/skeleton.c    | normal! gg4j7l
+autocmd BufNewFile *.h         0r ~/.vim/templates/skeleton.h    | execute '%s/{{FILENAME}}/'.escape(substitute(toupper(getreg('%')),"\\.","_",""),'/') | normal! gg^3j
+autocmd BufNewFile *.html      0r ~/.vim/templates/skeleton.html | normal! gg^5j16l
+autocmd BufNewFile *.tex       0r ~/.vim/templates/skeleton.tex  | normal! gg^22j
+autocmd BufNewFile *.py        0r ~/.vim/templates/skeleton.py   | normal! G
+
+
+autocmd BufNewFile,BufRead *.ex,*.exs	setlocal filetype=elixir
+autocmd BufNewFile,BufRead .tmux.conf   setlocal ft=tmux
+autocmd BufNewFile,BufRead *.rs         setlocal ft=rust
+autocmd FileType markdown               setlocal tw=70 ts=2 sw=2 et wrap fo-=t
+autocmd FileType make                   setlocal listchars=tab:>-,trail:·
+
+autocmd FileType elixir packadd vim-elixir | syntax on
+
+" sane defaults for Make files
+autocmd FileType make setlocal noet
+autocmd FileType make nmap <leader>t :%s/^<Space>\{4}/\t/<CR>
+
+"-- }}}
+
+"-- {{{
+
+command Nows :%s/\s\+$//e                " remove trailing white space
+command Nobl :g/^\s*$/d                  " remove blank lines
+command Chmodx :!chmod a+x %             " make current buffer executable
+command FixSyntax :syntax sync fromstart " fix syntax highlighting
+
+command W :w
+
+"-- }}}
+
+" COMPILATION MODE:
+" As close as it can get about emacs compilation-mode.
+" :h :compiler
+" :h 'makeprg'
+" :h 'errorformat'
+" :h errorformat
+" :h quickfix
+" :h vimgrep
